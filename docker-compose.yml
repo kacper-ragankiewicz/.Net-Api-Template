@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: "rabbitmq:management"
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"  # AMQP protocol port
+      - "15672:15672"  # Management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+  product-service:
+    build:
+      context: ./SwaggerApi
+      dockerfile: Dockerfile
+    container_name: product-service
+    depends_on:
+      - rabbitmq
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5002:80"
+
+  order-service:
+    build:
+      context: ./OrderService
+      dockerfile: Dockerfile
+    container_name: order-service
+    depends_on:
+      - rabbitmq
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5003:80"
+
+  auth-service:
+    build: 
+      context: ./AuthService
+      dockerfile: Dockerfile
+    container_name: auth-service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5004:80"
+
+  api-gateway:
+    build: 
+      context: ./ApiGateway
+      dockerfile: Dockerfile
+    container_name: api-gateway
+    depends_on:
+      - product-service
+      - order-service
+      - auth-service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5001:5001"

@@ -1,0 +1,78 @@
+{
+    "Routes": [
+        {
+            "DownstreamPathTemplate": "/swagger/index.html",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "product-service",
+                    "Port": 80
+                }
+            ],
+            "UpstreamPathTemplate": "/swagger",
+            "UpstreamHttpMethod": [
+                "GET"
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/swagger/v1/swagger.json",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "product-service",
+                    "Port": 80
+                }
+            ],
+            "UpstreamPathTemplate": "/swagger/v1/swagger.json",
+            "UpstreamHttpMethod": [
+                "GET"
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/weatherforecast",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "product-service",
+                    "Port": 80
+                }
+            ],
+            "UpstreamPathTemplate": "/weatherforecast",
+            "UpstreamHttpMethod": [
+                "GET"
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/orders",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "order-service",
+                    "Port": 80
+                }
+            ],
+            "UpstreamPathTemplate": "/orders",
+            "UpstreamHttpMethod": [
+                "GET",
+                "POST"
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/auth",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "auth-service",
+                    "Port": 80
+                }
+            ],
+            "UpstreamPathTemplate": "/auth",
+            "UpstreamHttpMethod": [
+                "POST"
+            ]
+        }
+    ],
+    "GlobalConfiguration": {
+        "BaseUrl": "http://api-gateway"
+    }
+}
