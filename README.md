@@ -1,3 +1,6 @@
+[![codebeat badge](https://codebeat.co/badges/96fdd8bb-9d1e-409e-9a93-66eb7f9ebb31)](https://codebeat.co/projects/github-com-kacper-ragankiewicz-net-api-template-main)
+
+
 # .NET Project with Docker Compose & Terraform
 
 ## Overview
